@@ -1,0 +1,29 @@
+package com.example.demo.service;
+
+import com.example.demo.entity.UserInformation;
+import com.example.demo.repository.UserInformationRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.Optional;
+
+@Service
+@RequiredArgsConstructor
+public class UserInformationService {
+    public  UserInformationRepository userInformationRepository;
+// create
+    public UserInformation createUser(UserInformation userInformation){
+        UserInformation u=userInformationRepository.save(userInformation);
+
+        return  u;
+    }
+
+    // get by email
+
+
+ public Optional<UserInformation> getUserByEmailId(String emailId){
+        Optional<UserInformation> gu= userInformationRepository.findById(emailId);
+        return  gu;
+ }
+}

@@ -1,0 +1,10 @@
+spring.application.name=order-service
+
+server.port=8002
+#server.servlet.context-path=/order
+spring.datasource.url=jdbc:postgresql://localhost:5432/microservices
+spring.datasource.username=postgres
+spring.datasource.password=gandhi1202
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true

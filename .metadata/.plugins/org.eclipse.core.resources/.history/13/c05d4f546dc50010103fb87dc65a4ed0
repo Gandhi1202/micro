@@ -1,0 +1,9 @@
+spring.application.name=amazon-gateway
+
+server.port:8888
+
+server.servlet.context-path=/api
+
+spring.cloud.gateway.server.webmvc.routes[0].id=order-service
+spring.cloud.gateway.server.webmvc.routes[0].uri=http://localhost:8002
+spring.cloud.gateway.server.webmvc.routes[0].predicates[0]=path=/orders/**
