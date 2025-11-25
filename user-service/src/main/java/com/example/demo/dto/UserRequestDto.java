@@ -1,9 +1,8 @@
-package com.example.demo.Dto;
+package com.example.demo.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.jpa.repository.support.JpaRepositoryImplementation;
 
 @Data
 @AllArgsConstructor

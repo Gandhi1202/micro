@@ -1,6 +1,8 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.dto.OrderDto;
 import com.example.demo.entity.UserInformation;
+import com.example.demo.feignclientInterface.OrderListMicroserviceFeignClient;
 import com.example.demo.repository.UserInformationRepository;
 import com.example.demo.service.UserInformationService;
 import org.springframework.core.ParameterizedTypeReference;
@@ -17,9 +19,12 @@ import java.util.Optional;
 
 public class UserInformationServiceImpl  implements UserInformationService {
     private  final UserInformationRepository userInformationRepository;
+    private final OrderListMicroserviceFeignClient orderFeign;
 
-    public UserInformationServiceImpl(UserInformationRepository userInformationRepository) {
+
+    public UserInformationServiceImpl(UserInformationRepository userInformationRepository, OrderListMicroserviceFeignClient orderFeign) {
         this.userInformationRepository = userInformationRepository;
+        this.orderFeign = orderFeign;
     }
 
 
@@ -38,6 +43,8 @@ public class UserInformationServiceImpl  implements UserInformationService {
     }
 
 
+
+    //Rest Template
     @Override
     public List<LinkedHashMap> getAllOrders() {
 
@@ -54,6 +61,12 @@ public class UserInformationServiceImpl  implements UserInformationService {
                 );
 
         return restResponse.getBody();
+    }
+
+    //Feign clients
+    @Override
+    public List<OrderDto> getOrdersUsingFeign() {
+        return orderFeign.getOrderListItem();
     }
 
 }

@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.Dto.UserResponseDto;
+import com.example.demo.dto.OrderDto;
 import com.example.demo.entity.UserInformation;
 
 import java.util.LinkedHashMap;
@@ -13,5 +13,7 @@ public interface UserInformationService {
     public Optional<UserInformation> getUser(Long id);
 
     public List<LinkedHashMap> getAllOrders();
+
+    List<OrderDto> getOrdersUsingFeign();
 
 }

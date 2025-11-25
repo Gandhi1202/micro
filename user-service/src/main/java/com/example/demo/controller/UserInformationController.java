@@ -1,13 +1,12 @@
 package com.example.demo.controller;
 
-import com.example.demo.Dto.UserRequestDto;
-import com.example.demo.Dto.UserResponseDto;
+import com.example.demo.dto.OrderDto;
 import com.example.demo.entity.UserInformation;
+import com.example.demo.feignclientInterface.OrderListMicroserviceFeignClient;
+import com.example.demo.service.UserInformationService;
 import com.example.demo.service.impl.UserInformationServiceImpl;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.LinkedHashMap;
@@ -20,9 +19,12 @@ import java.util.Optional;
 public class UserInformationController {
 
     private final UserInformationServiceImpl userInformationServiceImpl;
-
-    public UserInformationController(UserInformationServiceImpl userInformationServiceImpl) {
+    private final OrderListMicroserviceFeignClient orderListMicroserviceFeignClient;
+    private final UserInformationService userService;
+    public UserInformationController(UserInformationServiceImpl userInformationServiceImpl, OrderListMicroserviceFeignClient orderListMicroserviceFeignClient, UserInformationService userService) {
         this.userInformationServiceImpl = userInformationServiceImpl;
+        this.orderListMicroserviceFeignClient = orderListMicroserviceFeignClient;
+        this.userService = userService;
     }
 
     @PostMapping("/post")
@@ -43,6 +45,15 @@ public class UserInformationController {
     @GetMapping("/getAllOrders")
     public List<LinkedHashMap> getOrders() {
         return userInformationServiceImpl.getAllOrders();
+    }
+    @GetMapping("/getAllOrdersFeign")
+    public List<OrderDto> getOrdersFeign() {
+        return orderListMicroserviceFeignClient.getOrderListItem();
+    }
+
+    @GetMapping("/getAllOrdersFeignRequestMapping")
+    public List<OrderDto> getOrdersFeignRequestMethod() {
+        return userService.getOrdersUsingFeign();
     }
 
 
