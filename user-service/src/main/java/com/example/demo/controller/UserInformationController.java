@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -36,6 +38,13 @@ public class UserInformationController {
         Optional<UserInformation> uu= userInformationServiceImpl.getUser(id);
         return  new ResponseEntity<>(uu,HttpStatus.OK);
     }
+
+
+    @GetMapping("/getAllOrders")
+    public List<LinkedHashMap> getOrders() {
+        return userInformationServiceImpl.getAllOrders();
+    }
+
 
 
 
